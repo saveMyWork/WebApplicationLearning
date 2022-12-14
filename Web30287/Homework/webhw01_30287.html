@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 30px 500px;
+      background-color: #f3f9ff;
+    }
+
+    .scope {
+      background-color: #a6d2ff;
+      padding: 4px;
+      border-radius: 10px;
+    }
+
+    .card {
+      border: 1px solid #dfdfdf;
+      margin-top: 32px;
+      padding: 16px;
+      border-radius: 10px;
+      background-color: white;
+      height: auto;
+      position: relative;
+      transition: all 0.3s ease-out;
+      filter: drop-shadow(0px 0px 3px rgb(226, 226, 226));
+    }
+
+    .card:hover {
+      transform: translateY(-5px) scale(1.005) translateZ(0);
+      box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
+        0 24px 46px var(--box-shadow-color);
+    }
+
+    .card-body {
+      margin: 16px;
+    }
+
+    .line {
+      height: 1px;
+      width: 100%;
+      background-color: #dfdfdf;
+    }
+
+    .card-text {
+      background-color: #f7f7f7;
+      border-radius: 10px;
+      margin-left: -16px;
+      margin-bottom: -16px;
+      margin-right: -16px;
+      padding: 8px 0px 8px 0px;
+    }
+
+    .Handle {
+      display: none;
+    }
+
+    .space {
+      margin-top: 32px;
+    }
+
+    .card-text p {
+      margin: 8px 0px 8px 16px;
+    }
+
+    .card-btn {
+      border: none;
+      background-color: rgb(255, 255, 255);
+      cursor: pointer;
+      padding: 3px 8px;
+    }
+
+    li:hover {
+      color: #b7dbff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+
+    .card-header {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0px 0px 16px 0px;
+      text-align: left;
+    }
+
+    .header {
+      font-size: 36px;
+    }
+
+    .inner {
+      margin: 16px;
+    }
+
+    .container {
+      display: none;
+      animation-name: contain;
+      animation-duration: 0.5s;
+    }
+
+    .intro {
+      text-align: center;
+      font-size: 47px;
+      font-weight: bold;
+      margin: 400px auto 0px auto;
+      letter-spacing: .15em;
+      border-right: .10em solid orange;
+      overflow: hidden;
+      white-space: nowrap;
+      animation:
+        typing 1s steps(40, end),
+        blink-caret .75s step-end infinite,
+        intro 3s;
+      ;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0
+      }
+
+      to {
+        width: 100%
+      }
+    }
+
+    @keyframes blink-caret {
+
+      from,
+      to {
+        border-color: transparent
+      }
+
+      50% {
+        border-color: #0080ff;
+      }
+    }
+
+    @keyframes contain {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes intro {
+      0% {
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+  </style>
+  <script>
+    var selectContent = ''
+    const handleClick = (contentSelect) => {
+      var Handle = document.getElementById('cardHandle')
+      if (Handle.style.display === 'none' || Handle.style.display === '') {
+        Handle.style.display = "block"
+      }
+      else {
+        if (selectContent === contentSelect) {
+          Handle.style.display = "none"
+        }
+      }
+
+      const list = ['tag', 'colour', 'list']
+      const listBody = ['tags', 'colours', 'lists']
+      var content = []
+      list.forEach((el) => {
+        var ele = document.getElementById(el)
+        ele.style.display = "none"
+        content.push(ele)
+      })
+      content.forEach((el) => {
+        if (el.id === contentSelect) {
+          selectContent = contentSelect
+          el.style.display = "block"
+        }
+      })
+      content = []
+      listBody.forEach((el) => {
+        var ele = document.getElementById(el)
+        ele.style.display = "none"
+        content.push(ele)
+      })
+      content.forEach((el) => {
+        if (el.id === contentSelect + 's') {
+          el.style.display = "block"
+        }
+      })
+      console.log(content)
+    }
+    const handleCard = (eleId) => {
+      var x = eleId == 'dropdown' ? document.getElementById("dropdown") : document.getElementById("details")
+      if (x.style.display === "none") {
+        x.style.display = "block"
+      } else {
+        x.style.display = "none"
+      }
+    }
+    const loadingScreen = () => {
+      var contain = document.getElementById("Contain")
+      var intro = document.getElementById("intro")
+      if (contain.style.display === "none" || contain.style.display === '') {
+        intro.style.display = "none"
+        contain.style.display = "block"
+      } else {
+        intro.style.display = "block"
+        contain.style.display = "none"
+      }
+    }
+    const mounted = () => {
+      setTimeout(() => {
+        loadingScreen()
+      }, 3000)
+
+    }
+    window.onload = mounted()
+  </script>
+</head>
+
+<body>
+  <div class="intro" id="intro">
+    Hello! Welcome To My Website
+  </div>
+  <div class="container" id="Contain">
+    <div class="card">
+      <p class="card-header header"> My First Webpage
+        <button class="card-btn" onclick="handleCard('details')">
+          <em class="fa fa-angle-down"></em>
+        </button>
+      </p>
+      <div class="line"></div>
+      <div class="card-body" id="details">
+        <div class="card-text">
+          <p>
+            Welcome to my <strong>first</strong> webpage. I am writing this page using a text editor and plain old
+            html.
+          </p>
+        </div>
+        <div class="space"></div>
+        <div class="card-text">
+          <p>
+            By learning html, I'll be able to create web pages like a pro....<br>
+            which I am of course.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="card-header">Here's what I've learned:
+        <button class="card-btn" onclick="handleCard('dropdown')">
+          <em class="fa fa-angle-down"></em>
+        </button>
+      </p>
+      <div class="line"></div>
+      <div class="card-body" id="dropdown">
+        <div class="card-text">
+          <ul>
+            <li onclick="handleClick('tag')">How to use HTML tags</li>
+            <li onclick="handleClick('colour')">How to use HTML colours</li>
+            <li onclick="handleClick('list')">How to create Lists</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card Handle" id="cardHandle">
+      <div class="card-header">
+        <div id="tag">HTML tags Example:</div>
+        <div id="colour">HTML colours Example:</div>
+        <div id="list">HTML Lists Example:</div>
+      </div>
+      <div class="line"></div>
+      <div class="card-body" id="dropdown">
+        <div class="card-text">
+          <div class="inner" id="tags">
+            <code>
+              <strong>Heading Tag</strong><br>
+              &emsp; HTML headings are defined with the &lt;h1&gt; to &lt;h6&gt; tags.  <br>
+              &lt;h1&gt; defines the most important heading. &lt;h6&gt; defines the least important heading:  <br>
+             <strong>Example </strong> <br>
+             &emsp; &lt;h1&gt;this is Heading&lt;/h1&gt; <br>
+              <strong>result</strong> <br><br>
+              <div class="scope">
+             <h1>this is Heading</h1>
+              </div>
+          </code>
+          </div>
+          <div class="inner" id="colours">
+            <code>
+              <strong>Colour</strong><br>
+              &emsp; Setting the style of an HTML element, can be done with the style attribute.<br>
+              The HTML style attribute has the following syntax:<br>
+              &lt;tagname style="property:value;"&gt; <br>
+              We use property is background-color to setting bg-color in element <br>
+             <strong>Example </strong> <br>
+             &emsp; &lt;h1 style="background-color:green;"&gt;this is Heading&lt;/h1&gt; <br>
+             <strong>result</strong> <br><br>
+             <div class="scope">
+             <h1 style="background-color:green;">this is Heading</h1>
+             </div>
+          </code>
+          </div>
+          <div class="inner" id="lists">
+            <code>
+            <strong>in html can create list 2 method</strong><br>
+            1.unorder list (ul)<br>
+            <strong>Example </strong> <br>
+            &emsp; &lt;ul&gt;<br>
+            &emsp; &emsp;unorder list example<br>
+            &emsp; &emsp;&lt;li&gt;some data &lt;/li&gt;<br>
+            &emsp; &emsp;&lt;li&gt;some data &lt;/li&gt;<br>
+            &emsp;&lt;/ul&gt; <br><br>
+            <strong>result</strong> <br><br>
+            <div class="scope">
+              <ul>
+                unorder list example
+                <li>some data</li>
+                <li>some data</li>
+              </ul>
+            </div><br>
+            2.order list (ol)<br>
+            <strong>Example </strong> <br>
+            &emsp; &lt;ol&gt;<br>
+            &emsp; &emsp;unorder list example<br>
+            &emsp; &emsp;&lt;li&gt;some data &lt;/li&gt;<br>
+            &emsp; &emsp;&lt;li&gt;some data &lt;/li&gt;<br>
+            &emsp;&lt;/ol&gt; <br>
+            <strong>result</strong> <br><br>
+            <div class="scope">
+              <ol>
+                unorder list example
+                <li>some data</li>
+                <li>some data</li>
+              </ol>
+            </div>
+          </code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>
+<!-- <Myname> Atip Nasakun 6304022630287 MC 3 WebApplication</Myname> -->
